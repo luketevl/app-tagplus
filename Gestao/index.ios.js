@@ -4,6 +4,6 @@
  * @flow
  */
 import { AppRegistry } from 'react-native';
-import Gestao from './app/index';
 
+import { Gestao } from './app';
 AppRegistry.registerComponent('Gestao', () => Gestao);
