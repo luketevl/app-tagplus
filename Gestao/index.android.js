@@ -5,5 +5,6 @@
  */
 import { AppRegistry } from 'react-native';
 
-import { Gestao } from './app';
+import Gestao from './app/index';
+
 AppRegistry.registerComponent('Gestao', () => Gestao);
