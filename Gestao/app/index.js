@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
 
-import WrapperLogin from './containers/WrapperLogin';
+import LoginContainer from './containers/LoginContainer';
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 import {
@@ -20,9 +20,7 @@ export default class Gestao extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <View style={styles.container}>
-        <WrapperLogin />
-        </View>
+          <LoginContainer />
       </Provider>
     );
   }
@@ -33,16 +31,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
