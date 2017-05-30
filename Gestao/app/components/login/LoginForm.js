@@ -5,14 +5,19 @@ import {
   TouchableOpacity,
   Text,
   StatusBar,
-  Switch
+  Switch,
+  Alert
 } from 'react-native';
+
 
 export default class LoginForm extends React.Component{
 
   constructor(props){
     super(props);
     this.handleRememberMe = this.handleRememberMe.bind(this);
+    this.handleShowForm   = this.handleShowForm.bind(this);
+    this.handleLogin      = this.handleLogin.bind(this);
+    this.handleRegister   = this.handleRegister.bind(this);
 
     this.state = {
       rememberMe: true,
@@ -26,58 +31,84 @@ export default class LoginForm extends React.Component{
     })
   }
 
+  handleShowForm(){
+    this.setState({
+      showForm: !this.state.showForm
+    });
+  }
+  handleLogin(){
+    this._validateFields();
+  }
+  handleRegister(){
+
+  }
+
+  _validateFields(){
+      if(!this.system || !this.user || !this.password){
+        Alert.alert(
+          "Atenção",
+          "Todos os campos são obrigatórios.",
+          [
+            {text: 'Fechar', style: 'cancel'}
+          ]
+        )
+      }
+  }
   render(){
-    let form= (<View></View>);
-    if(this.state.showForm){
-      form = (
-              <View>
-                <TextInput
-                  placeholder="Digite o nome do sistema"
-                  returnKeyType="next"
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                  maxLength={16}
-                  ref={input => this.system = input}
-                  onSubmitEditing = {() => this.user.focus()}
-                  style={styles.input} />
-
-                <TextInput
-                  placeholder="Digite o usuário"
-                  returnKeyType="next"
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                  ref={input => this.user = input}
-                  onSubmitEditing = {() => this.password.focus()}
-                  style={styles.input} />
-
-                <TextInput
-                  placeholder="Digite a senha"
-                  secureTextEntry
-                  returnKeyType="send"
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                  ref={input => this.password = input}
-                  style={styles.input} />
-
-                <View style={styles.containerRememberMe}>
-                  <Text style={styles.textRememberMe}>Lembrar dados</Text>
-                  <Switch
-                    onValueChange={this.handleRememberMe}
-                    value={this.state.rememberMe}
-                    style={styles.switch} />
-                </View>
-              </View>
-      )
-    }
+    let primaryButtonText = 'ACESSAR';
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
 
-        <TouchableOpacity style={[styles.buttonContainer, styles.buttonPrimary]}>
-          <Text style={styles.buttonText}>JÁ POSSUO SISTEMA</Text>
+        <View>
+          <TextInput
+            placeholder="Digite o nome do sistema"
+            returnKeyType="next"
+            autoCorrect={false}
+            autoCapitalize="none"
+            maxLength={16}
+            minLength={3}
+            ref={input => this.systemInput = input}
+            onSubmitEditing = {text => this.userInput.focus()}
+            onChangeText={text => this.system = text}
+            style={styles.input} />
+
+          <TextInput
+            placeholder="Digite o usuário"
+            returnKeyType="next"
+            autoCorrect={false}
+            autoCapitalize="none"
+            ref={input => this.userInput = input}
+            onSubmitEditing = {text => this.passwordInput.focus()}
+            onChangeText={text => this.user = text}
+            style={styles.input} />
+
+          <TextInput
+            placeholder="Digite a senha"
+            secureTextEntry
+            returnKeyType="send"
+            autoCorrect={false}
+            autoCapitalize="none"
+            maxLength={16}
+            minLength={6}
+            ref={input => this.passwordInput = input}
+            onSubmitEditing = {text => this.password = text}
+            onChangeText={text => this.password = text}
+            style={styles.input} />
+
+          <View style={styles.containerRememberMe}>
+            <Switch
+              onValueChange={this.handleRememberMe}
+              value={this.state.rememberMe}
+              style={styles.switch} />
+            <Text style={styles.textRememberMe}>Lembrar dados</Text>
+          </View>
+        </View>
+
+        <TouchableOpacity onPress={this.handleLogin} style={[styles.buttonContainer, styles.buttonPrimary]}>
+          <Text style={styles.buttonText}>{primaryButtonText}</Text>
         </TouchableOpacity>
-        {form}
-        <TouchableOpacity style={[styles.buttonContainer, styles.buttonAccent]}>
+        <TouchableOpacity onPress={this.handleRegister} style={[styles.buttonContainer, styles.buttonAccent]}>
           <Text style={styles.buttonText}>CADASTRAR</Text>
         </TouchableOpacity>
 
@@ -98,11 +129,13 @@ const styles = {
   textRememberMe:{
     paddingHorizontal: 5,
     marginBottom: 10,
-    fontSize: 14
+    fontSize: 14,
+    backgroundColor: 'transparent',
+    color: '#FFF'
   },
   input:{
     height: 40,
-    backgroundColor: '#CECECE',
+    backgroundColor: '#FFF',
     marginBottom: 10,
     paddingHorizontal: 10,
     // margin: 10,
