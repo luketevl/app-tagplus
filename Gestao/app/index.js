@@ -8,8 +8,8 @@ import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
 import loggerMiddleware from 'redux-logger';
 
-import LoginContainer from './containers/LoginContainer';
 import Loader from './components/Loader';
+import { RootNagivation } from './config/router';
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
@@ -23,7 +23,7 @@ export default class Gestao extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <LoginContainer />
+        <RootNagivation />
         {/* <Loader animating={false} /> */}
       </Provider>
     );
