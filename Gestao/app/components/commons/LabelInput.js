@@ -4,8 +4,11 @@ import {
   StyleSheet,
   View,
   Text,
-  TextInput
+  TextInput,
+  TouchableOpacity
 } from 'react-native';
+
+import { Icon } from 'react-native-elements';
 
 export default class LabelInput extends React.Component{
   constructor(props){
@@ -15,10 +18,17 @@ export default class LabelInput extends React.Component{
     return (
       <View style={styles.labelContainer}>
           <View style={styles.label}>
-            <Text>{this.props.title}</Text>
+            <Text style={styles.text}>{this.props.title}</Text>
           </View>
           <TextInput {...this.props.inputConfig}
-              style={styles.default} />
+            style={styles.default} />
+
+            {this.props.iconShow && (
+              <TouchableOpacity onPress={this.props.iconHandle}>
+                <Icon name= {this.props.iconName} />
+            </TouchableOpacity>
+            )}
+
         </View>
     )
   }
@@ -29,6 +39,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: 2,
     flex: 1,
+  },
+  text:{
+    color: '#808080'
   },
   label: {
     marginLeft: 10,

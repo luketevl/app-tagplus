@@ -97,11 +97,11 @@ export default class LoginForm extends React.Component{
             style={styles.input} />
 
           <View style={styles.containerRememberMe}>
+            <Text style={styles.textRememberMe}>Lembrar dados</Text>
             <Switch
               onValueChange={this.handleRememberMe}
               value={this.state.rememberMe}
               style={styles.switch} />
-            <Text style={styles.textRememberMe}>Lembrar dados</Text>
           </View>
         </View>
 

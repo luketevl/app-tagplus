@@ -17,11 +17,33 @@ export default class ClientsLists extends React.Component {
       clients: [{
         id: Math.floor(Math.random() * 10) +1,
         ativo: true,
-        "codigo": "C3PO",
+        "codigo": "WQKOPWQLKDJZNM9",
         "tipo": "J",
         "razao_social": "João da Silva",
         "exterior": false,
-        "cpf": "999.999.999"
+        "cpf": "999.999.999",
+        contatos: [
+          {
+            id: Math.floor(Math.random() * 10) +1,
+            descricao: 'luketevl@gmail.com',
+            principal: true,
+            tipo_contato:{
+              id: Math.floor(Math.random() * 10) +1,
+              tipo: 'E',
+              descricao: 'E-mail'
+            }
+          },
+          {
+            id: Math.floor(Math.random() * 10) +1,
+            descricao: 'luklhenriqueetevl@gattecnologia.com',
+            principal: false,
+            tipo_contato:{
+              id: Math.floor(Math.random() * 10) +1,
+              tipo: 'E',
+              descricao: 'E-mail'
+            }
+          }
+        ]
       },
       {
         id: Math.floor(Math.random() * 10) +1,
@@ -30,7 +52,31 @@ export default class ClientsLists extends React.Component {
         "tipo": "F",
         "razao_social": "Lukete",
         "exterior": false,
-        "cpf": "119.129.459"
+        "cpf": "119.129.459",
+        contatos: [
+
+          {
+            id: Math.floor(Math.random() * 10) +1,
+            descricao: 'luklhenriqueetevl@gattecnologia.com',
+            principal: true,
+            tipo_contato:{
+              id: Math.floor(Math.random() * 10) +1,
+              tipo: 'E',
+              descricao: 'E-mail'
+            }
+          },
+
+          {
+            id: Math.floor(Math.random() * 10) +1,
+            descricao: '3232 323202',
+            principal: true,
+            tipo_contato:{
+              id: Math.floor(Math.random() * 10) +1,
+              tipo: 'T',
+              descricao: 'Celular'
+            }
+          }
+        ]
       },
       {
         id: Math.floor(Math.random() * 10) +1,
@@ -38,8 +84,30 @@ export default class ClientsLists extends React.Component {
         "codigo": "C3PO",
         "tipo": "J",
         "razao_social": "João da Silva",
-        "exterior": false,
-        "cpf": "999.999.999"
+        "exterior": true,
+        "cpf": "999.999.999",
+        contatos: [
+          {
+            id: Math.floor(Math.random() * 10) +1,
+            descricao: 'luketevl2@gmail.com',
+            principal: false,
+            tipo_contato:{
+              id: Math.floor(Math.random() * 10) +1,
+              tipo: 'E',
+              descricao: 'E-mail'
+            }
+          },
+          {
+            id: Math.floor(Math.random() * 10) +1,
+            descricao: 'lhenrique@gattecnologia.com',
+            principal: true,
+            tipo_contato:{
+              id: Math.floor(Math.random() * 10) +1,
+              tipo: 'E',
+              descricao: 'E-mail'
+            }
+          }
+        ]
       }
     ]
     }
