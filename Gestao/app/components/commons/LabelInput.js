@@ -17,9 +17,11 @@ export default class LabelInput extends React.Component{
   render(){
     return (
       <View style={styles.labelContainer}>
+        {!this.props.hideLabel && (
           <View style={styles.label}>
             <Text style={styles.text}>{this.props.title}</Text>
           </View>
+        )}
           <TextInput {...this.props.inputConfig}
             style={styles.default} />
 

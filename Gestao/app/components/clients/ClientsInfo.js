@@ -15,12 +15,13 @@ import {
   ListItem,
   FormLabel,
   FormInput,
-  FormValidationMessage
+  FormValidationMessage,
+  Row
 
 } from 'react-native-elements';
 
 import LabelInput from '../commons/LabelInput';
-
+import GroupInfo from '../commons/GroupInfo';
 
 export default class ClientsInfo extends React.Component{
   constructor(props){
@@ -82,7 +83,7 @@ export default class ClientsInfo extends React.Component{
   }
 
   render(){
-    const { razao_social, cpf, cnpj, codigo, tipo, contatos, exterior } = this.props.navigation.state.params;
+    const { razao_social, cpf, cnpj, codigo, tipo, contatos, exterior, enderecos } = this.props.navigation.state.params;
     let nameRazao;
     let cpfCnpj;
     if(this.state.personFisica){
@@ -288,8 +289,125 @@ export default class ClientsInfo extends React.Component{
               hideChevron />
           )
         })}
-
       </List>
+
+      <List>
+        <ListItem
+          title={(
+            <GroupInfo
+                iconName='remove'
+                iconColor='rgb(255, 59, 48)'
+                iconHandle={() => 9}
+                iconBottomLabel='Adicionar endereço'
+                iconBottomColor='rgb(76, 217, 100)'
+                iconBottomName='add'
+                iconBottomHandle={() => 9}
+            >
+
+                {
+                  enderecos.map(address => (
+                    <View>
+                      <Row>
+                         <LabelInput title='Código'
+                          inputConfig = {
+                            {
+                              placeholder: `Digite o CEP`,
+                              returnKeyType: "next",
+                              keyboardType: 'phone-pad',
+                              autoCorrect: false,
+                              maxLength: 14,
+                              ref: input => this.codeInput = input,
+                              onSubmitEditing: text => this.userInput.focus(),
+                              onChangeText: text => this.codigo = text,
+                              value: address.cep,
+                            }
+                          }
+                          hideLabel= {true}
+                          iconShow={true}
+                          iconName='search'
+                          iconHandle={() => 9}
+                        />
+                        
+                      </Row>
+                      <Row>
+                        <TextInput 
+                          placeholder={ `Informe o Logradouro`}
+                          returnKeyType={ "next"}
+                          autoCorrect={false}
+                          ref={ input => this.systemInput = input}
+                          onSubmitEditing={ text => this.userInput.focus()}
+                          onChangeText={ text => this.system = text}
+                          value={address.logradouro}
+                          style={styles.defaultTextInput}
+                        />
+                      </Row>
+                      <Row>
+                        <TextInput 
+                          placeholder={ `Informe o Número`}
+                          returnKeyType={ "next"}
+                          autoCorrect={false}
+                          ref={ input => this.systemInput = input}
+                          onSubmitEditing={ text => this.userInput.focus()}
+                          onChangeText={ text => this.system = text}
+                          value={address.numero}
+                          style={styles.defaultTextInput}
+                        />
+                        <TextInput 
+                          placeholder={ `Informe o Complemento`}
+                          returnKeyType={ "next"}
+                          autoCorrect={false}
+                          ref={ input => this.systemInput = input}
+                          onSubmitEditing={ text => this.userInput.focus()}
+                          onChangeText={ text => this.system = text}
+                          value={address.complemento}
+                          style={styles.defaultTextInput}
+                        />
+                      </Row>
+                      <Row>
+                        <TextInput 
+                          placeholder={ `Informe o Bairro`}
+                          returnKeyType={ "next"}
+                          autoCorrect={false}
+                          ref={ input => this.systemInput = input}
+                          onSubmitEditing={ text => this.userInput.focus()}
+                          onChangeText={ text => this.system = text}
+                          value={address.bairro}
+                          style={styles.defaultTextInput}
+                        />
+                      </Row>
+                      <Row>
+                        <TextInput 
+                          placeholder={ `Informe a Cidade`}
+                          returnKeyType={ "next"}
+                          autoCorrect={false}
+                          ref={ input => this.systemInput = input}
+                          onSubmitEditing={ text => this.userInput.focus()}
+                          onChangeText={ text => this.system = text}
+                          value={address.cidade.nome}
+                          style={styles.defaultTextInput}
+                        />
+                        <TextInput 
+                          placeholder={ `Informe a Estado`}
+                          returnKeyType={ "next"}
+                          autoCorrect={false}
+                          ref={ input => this.systemInput = input}
+                          onSubmitEditing={ text => this.userInput.focus()}
+                          onChangeText={ text => this.system = text}
+                          value={address.cidade.estado.sigla}
+                          style={styles.defaultTextInput}
+                        />
+                      </Row>
+                    </View>
+                  ))
+                }
+
+            
+            </GroupInfo>
+          )}
+          hideChevron
+        />
+      </List>
+
       </ScrollView>
     </KeyboardAvoidingView>
     )
@@ -311,5 +429,9 @@ const styles = StyleSheet.create({
   textPerson: {
     marginBottom: 10,
     paddingVertical: 19
+  },
+  defaultTextInput:{
+    height: 18,
+    flex: 1
   }
 });

@@ -11,6 +11,8 @@ import {
 
 import SearchBar from '../commons/SearchBar';
 
+import { replace_accents } from '../../js/helpers';
+
 export default class ClientsLists extends React.Component {
 
   constructor(props){
@@ -78,6 +80,29 @@ export default class ClientsLists extends React.Component {
               descricao: 'Celular'
             }
           }
+        ],
+        enderecos: [
+          {
+            id: Math.floor(Math.random() * 10) +1,
+            principal: true,
+            exterior: false,
+            cep: '30550-720',
+            logradouro: 'Nova Ponte',
+            numero: '482c',
+            complemento: 'Casa',
+            bairro: 'Salgado Filho',
+            cidade:{
+             id: Math.floor(Math.random() * 10) +1,
+             codigo: 4034920,
+             nome: 'Belo Horizonte',
+             estado: {
+              id: Math.floor(Math.random() * 10) +1,
+              codigo: 3243242,
+              sigla: 'MG',
+              nome: 'Minas Gerais'
+             } 
+            }
+          }
         ]
       },
       {
@@ -120,20 +145,17 @@ export default class ClientsLists extends React.Component {
   }
 
   handleFilter(text){
-    console.log(this._removeSpecialCaracter(text));
+    console.log(replace_accents(text));
     if(text == ''){
       this.setState({clientsFiltered: this.state.clients});
     }
     else{
       this.setState({
-        clientsFiltered: this.state.clients.filter(el => this._removeSpecialCaracter(el.razao_social).includes(this._removeSpecialCaracter(text)))
+        clientsFiltered: this.state.clients.filter(el => replace_accents(el.razao_social).includes(replace_accents(text)))
       })
     }
   }
 
-  _removeSpecialCaracter(text){
-    return text.replace(/[^\w\s]/gi, '');
-  }
   clientInfo(client){
     console.log(client);
     this.props.navigation.navigate('ClientsInfo', { ...client});
