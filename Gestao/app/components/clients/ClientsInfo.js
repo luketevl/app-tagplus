@@ -80,11 +80,12 @@ export default class ClientsInfo extends React.Component{
       generFemale: this.state.generMale
     })
   }
+
   render(){
     const { razao_social, cpf, cnpj, codigo, tipo, contatos, exterior } = this.props.navigation.state.params;
     let nameRazao;
     let cpfCnpj;
-    if(tipo == 'F'){
+    if(this.state.personFisica){
       nomeRazao = 'Nome';
       cpfCnpj = 'CPF';
 
@@ -113,7 +114,7 @@ export default class ClientsInfo extends React.Component{
         event: this.handleGenerMale
       },
       {
-        label: 'Feminio',
+        label: 'Feminino',
         value: this.state.generFemale,
         event: this.handleGenerFemale
       }

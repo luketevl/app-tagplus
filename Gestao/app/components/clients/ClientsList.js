@@ -9,12 +9,14 @@ import {
   ListItem
 } from 'react-native-elements';
 
+import SearchBar from '../commons/SearchBar';
+
 export default class ClientsLists extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      clients: [{
+    this.handleFilter = this.handleFilter.bind(this);
+    const clients =[{
         id: Math.floor(Math.random() * 10) +1,
         ativo: true,
         "codigo": "WQKOPWQLKDJZNM9",
@@ -109,10 +111,29 @@ export default class ClientsLists extends React.Component {
           }
         ]
       }
-    ]
+    ];
+
+    this.state = {
+      clients,
+      clientsFiltered: clients
     }
   }
 
+  handleFilter(text){
+    console.log(this._removeSpecialCaracter(text));
+    if(text == ''){
+      this.setState({clientsFiltered: this.state.clients});
+    }
+    else{
+      this.setState({
+        clientsFiltered: this.state.clients.filter(el => this._removeSpecialCaracter(el.razao_social).includes(this._removeSpecialCaracter(text)))
+      })
+    }
+  }
+
+  _removeSpecialCaracter(text){
+    return text.replace(/[^\w\s]/gi, '');
+  }
   clientInfo(client){
     console.log(client);
     this.props.navigation.navigate('ClientsInfo', { ...client});
@@ -120,9 +141,12 @@ export default class ClientsLists extends React.Component {
   render(){
     return (
       <ScrollView>
+        <SearchBar 
+          onChangeText={this.handleFilter}
+        />
         <List>
           {
-            this.state.clients.map((client, i) => (
+            this.state.clientsFiltered.map((client, i) => (
               <ListItem
                 key={i}
                 roundAvatar
