@@ -71,9 +71,16 @@ export default class ClientsInfo extends React.Component{
       enderecos: []
     })
   }
+  
   _removeAddress(address){
     this.setState({
-      enderecos: this.state.addresses.filter(el => el != address)
+      enderecos: this.state.enderecos.filter(el => el != address)
+    })
+  }
+
+  _removeContact(contact){
+    this.setState({
+      contatos: this.state.contatos.filter(el => el != contact)
     })
   }
   handleExterior(){
@@ -322,7 +329,7 @@ export default class ClientsInfo extends React.Component{
                           key={contact.id}
                           iconShow={!contact.principal}
                           iconName='clear'
-                          iconHandle={() => 9}
+                          iconHandle={() => this._removeContact(contact)}
                         />
                       )}
                 hideChevron />
@@ -330,7 +337,7 @@ export default class ClientsInfo extends React.Component{
           })}
         </ListTitle>
 
-      {this.state.enderecos.length >= 1 && (
+      {this.state.enderecos >= 1 && (
         <ListTitle title="Endereços">
             {
               this.state.enderecos.map((address, key) => (
