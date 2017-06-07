@@ -10,6 +10,10 @@ import {
 
 import { Icon } from 'react-native-elements';
 
+import { 
+  COLORS
+ } from '../../config/colors';
+
 export default class LabelInput extends React.Component{
   constructor(props){
     super(props);
@@ -43,7 +47,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   text:{
-    color: '#808080'
+    color: COLORS.label
   },
   label: {
     marginLeft: 10,

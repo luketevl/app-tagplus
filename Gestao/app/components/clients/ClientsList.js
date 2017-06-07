@@ -6,8 +6,13 @@ import {
 
 import {
   List,
-  ListItem
+  ListItem,
+  Image
 } from 'react-native-elements';
+
+import {
+  COLORS
+} from '../../config/colors';
 
 import SearchBar from '../commons/SearchBar';
 
@@ -26,6 +31,7 @@ export default class ClientsLists extends React.Component {
         "razao_social": "João da Silva",
         "exterior": false,
         "cpf": "999.999.999",
+        sexo: 'F',
         contatos: [
           {
             id: Math.floor(Math.random() * 10) +1,
@@ -57,6 +63,7 @@ export default class ClientsLists extends React.Component {
         "razao_social": "Lukete",
         "exterior": false,
         "cpf": "119.129.459",
+        sexo: 'M',
         contatos: [
 
           {
@@ -107,7 +114,7 @@ export default class ClientsLists extends React.Component {
       },
       {
         id: Math.floor(Math.random() * 10) +1,
-        ativo: true,
+        ativo: false,
         "codigo": "C3PO",
         "tipo": "J",
         "razao_social": "João da Silva",
@@ -171,8 +178,7 @@ export default class ClientsLists extends React.Component {
             this.state.clientsFiltered.map((client, i) => (
               <ListItem
                 key={i}
-                roundAvatar
-                avatar ={{uri: 'https://www.google.com.br/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwii9ejotJrUAhXECpAKHRyzDP0QjRwIBw&url=http%3A%2F%2Fwww.photoshopphotography.com%2Fcrate-your-cartoon-face-avatar%2F&psig=AFQjCNFB9rh9qzalY1YgKmja9NxQ2Cpr1g&ust=1496329728504830'}}
+                leftIcon={{name: 'fiber-manual-record', color: client.ativo ? COLORS.positive : ''}}
                 title={client.razao_social}
                 subtitle={`${client.cpf} | ${client.codigo}`}
                 onPress={() => this.clientInfo(client)}

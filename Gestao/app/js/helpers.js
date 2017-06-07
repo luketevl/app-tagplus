@@ -24,3 +24,35 @@ export const replace_accents = text => {
 
 	return string;
 };
+
+
+const _calcEanDv = value => {
+	
+	let pares = 0 ;
+	let impares = 0;
+	
+	const cod = value.replace('-','');
+	
+	/* verificando se tem todos os digitos, caso nao haja criando-o e fazendo verificacao caso tenha */
+	if(cod.length <= 11) return false;
+
+	/* fazendo verificacao*/
+	for (let i=0; i <= 11; i++){
+		if( i%2 == 0 ){
+			pares += parseInt(value[i]);
+		}else{
+			impares += parseInt(value[i]) * 3;
+		}	
+	}
+
+	const dv = 10 - ((impares + pares) % 10);
+	return (dv > 9) ? 0 : dv;
+}
+
+export const generateEan = () => {
+	let cod 	= ((Math.floor((Math.random() * 99999 + 1))) * new Date().getTime()).toString();
+	cod = "20"+cod.substr(-10);
+	cod += _calcEanDv(cod);
+	return cod;
+};
+
